@@ -6,7 +6,7 @@
 /*   By: mriccard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 13:52:31 by mriccard          #+#    #+#             */
-/*   Updated: 2018/04/11 14:15:09 by mriccard         ###   ########.fr       */
+/*   Updated: 2018/04/12 22:35:04 by mriccard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,34 +21,48 @@ int			ft_printf (char *str, ...);
 
 char		*ft_itoa_base(intmax_t v, int base);
 
-unsigned int ps(va_list *list);
+unsigned int ps(unsigned int *flags, va_list *list);
 
-unsigned int pcs(va_list *list);
+unsigned int pcs(unsigned int *flags, va_list *list);
 
-unsigned int pp(va_list *list);
+unsigned int pp(unsigned int *flags, va_list *list);
 
-unsigned int pd(va_list *list);
+unsigned int pd(unsigned int *flags, va_list *list);
 
-unsigned int pcd(va_list *list);
+unsigned int pcd(unsigned int *flags, va_list *list);
 
-unsigned int pi(va_list *list);
+unsigned int pi(unsigned int *flags, va_list *list);
 
-unsigned int po(va_list *list);
+unsigned int po(unsigned int *flags, va_list *list);
 
-unsigned int pco(va_list *list);
+unsigned int pco(unsigned int *flags, va_list *list);
 
-unsigned int pu(va_list *list);
+unsigned int pu(unsigned int *flags, va_list *list);
 
-unsigned int pcu(va_list *list);
+unsigned int pcu(unsigned int *flags, va_list *list);
 
-unsigned int px(va_list *list);
+unsigned int px(unsigned int *flags, va_list *list);
 
-unsigned int pcx(va_list *list);
+unsigned int pcx(unsigned int *flags, va_list *list);
 
-unsigned int pc(va_list *list);
+unsigned int pc(unsigned int *flags, va_list *list);
 
-unsigned int pcc(va_list *list);
+unsigned int pcc(unsigned int *flags, va_list *list);
 
-unsigned int bt(va_list *list);
+unsigned int perc(unsigned int *flags, va_list *list);
+
+unsigned int pj(unsigned int *flags, va_list *list);
+
+unsigned int pz(unsigned int *flags, va_list *list);
+
+unsigned int pl(unsigned int *flags, va_list *list);
+
+unsigned int ph(unsigned int *flags, va_list *list);
+
+unsigned int pll(unsigned int *flags, va_list *list);
+
+unsigned int phh(unsigned int *flags, va_list *list);
+
+unsigned int bt(unsigned int *flags, va_list *list);
 
 #endif
