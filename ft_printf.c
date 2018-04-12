@@ -6,30 +6,36 @@
 /*   By: mriccard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 16:31:30 by mriccard          #+#    #+#             */
-/*   Updated: 2018/04/10 20:58:26 by mriccard         ###   ########.fr       */
+/*   Updated: 2018/04/12 22:03:53 by mriccard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static unsigned int magic(char t, va_list *list, int *flags)
+static unsigned int magic(char **str, va_list *list, unsigned int *flags)
 {
-	const char l[26] = {'s','S','p','d','D','i','o','O','u','U','x','X','c','C','e','E','f','F','g','G','a','A','n','b','r','k'};
-	unsigned int(*func[27])(va_list *list) = {ps, pcs, pp, pd, pcd, pi, po, pco, pu, pcu, px, pcx, pc, pcc,,,,,,,,,,,,, bt};
+	const char l[19] = {'s','S','p','d','D','i','o','O','u','U','x','X','c','C','%','j','z','l','h'};
+	unsigned int(*func[22])(unsigned int *flags, va_list *list) = {ps, pcs, pp, pd, pcd, pi, po, pco, pu, pcu, px, pcx, pc, pcc, perc, pj, pz, pl, ph, bt, pll, phh};
 	unsigned int i;
 
 	i = 0;
-	while (i < 26 && l[i] != t)
+	while (i < 19 && l[i] != (*str)[0])
 		i++;
-	return((*func[i])(list));
+	if ((i == 17 || i == 18) && (*str)[1] == l[i])
+	{
+		i = i + 3;
+		(*str) = (*str) + 1;
+	}
+		(*str) = (*str) + 1;
+	return((*func[i])(flags, list));
 
 }
 
-static flags_manager(str, unsigned int *min-spaces, va_list *list, int *flags)
+static unsigned int flags_manager(char **str, va_list *list, unsigned int *flags)
 {
 	int i;
 	int j;
-	int flags[5] = {0,0,0,0,0}
+	unsigned int dotflag
 
 	i = 1;
 	while ((*str)[i] == '#' || (*str)[i] == '0' || (*str)[i] == '-' || (*str)[i] == '+' || (*str)[i] == ' ')
@@ -41,39 +47,34 @@ static flags_manager(str, unsigned int *min-spaces, va_list *list, int *flags)
 		flags[4] = ((*str)[i]) == ' ';
 		i++;
 	}
+
+while((*str)[i] == '*' || (*str)[i] == '.' || ft_isdigit((*str)[i]))
+{
+	if((*str)[i - 1] == '.')
+	{
+		dotflag = 1;
+	}
+	else
+	{
+		dotflag = 0;
+	}
+
 	if((*str)[i] == '*')
 	{
-		if((ft_isdigit(*str)[i + 1]))
-		{
-			i++;
-			*min-spaces = (unsigned int) ft_atoi((*str) + i);
-			while (ft_isdigit((*str)[i]))
-				i++;
-		}
-		else
-		{
-			*min-spaces = (unsigned int) ft_atoi(va_arg(*list, char*));
-			i++;
-		}
-		//se quello dopo e un numero allora prendi il numero se no prendi va_arg e viceversa se prima c'e il numero e poi asterisco prendi va arg se no il numero
+		flags[5 + dotflag] = (unsigned int) ft_atoi(va_arg(*list, char*));
+		i++;
 	}
-	else if(ft_sidigit((*str)[i]))
+	else if((*str)[i] == '.')
 	{
-		j = 0;
-		while(ft_sidigit((*str)[i + j]))
-			j++;
-		if((*str)[i + j] == '*')
-		{
-			i = i + j;
-			*min-spaces = (unsigned int) ft_atoi(va_arg(*list, char*));
-			i++;
-		}
-		else
-		{
-			*min-spaces = (unsigned int) ft_atoi((*str) + i);
-				i = i + j;
-		}
+		i++;
 	}
+	else
+	{
+		flags[5 + dotflag] = (unsigned int) ft_atoi((*str) + i);
+		while(ft_sidigit((*str)[i]))
+			            i++;
+	}
+}
 	return (i);
 }
 
@@ -81,19 +82,13 @@ static unsigned int ppjn(char **str, va_list *list)
 {
 	unsigned int i;
 	unsigned int count;
-	unsigned int min-spaces;
+	unsigned int flags[7];
 
 	if (*str == NULL)
 		return (0);
-	if((*str)[1] == '%')
-	{
-		write(1,"%",1);
-		*str = *str + 2;
-		return (1);
-	}
-	i = flags_manager(str, &min-spaces, flags);
-	count = magic((*str)[i], list, flags);
-	*str = (*str) + i + 1; //da per scontato che la lettera dopo il percentio sia una e solo una, MALE!!!!
+	i = flags_manager(str, flags);
+	count = magic((*str) + i, list, flags);
+	//ORA LO FA DENTRO MAGI COL PUNTATORE *str = (*str) + i + 1; //da per scontato che la lettera dopo il percentio sia una e solo una, MALE!!!!
 	return (count);
 }
 
