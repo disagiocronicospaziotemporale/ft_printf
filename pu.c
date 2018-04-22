@@ -6,13 +6,13 @@
 /*   By: mriccard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:28:51 by mriccard          #+#    #+#             */
-/*   Updated: 2018/03/08 17:08:13 by mriccard         ###   ########.fr       */
+/*   Updated: 2018/04/21 20:30:11 by mriccard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-unsigned int pu(va_list *list)
+unsigned int pu(unsigned int *flags, va_list *list)
 {
 write(1, "\npu\n", 4);
 return (2);

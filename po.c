@@ -6,13 +6,13 @@
 /*   By: mriccard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:28:51 by mriccard          #+#    #+#             */
-/*   Updated: 2018/03/08 17:07:09 by mriccard         ###   ########.fr       */
+/*   Updated: 2018/04/21 20:30:57 by mriccard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-unsigned int po(va_list *list)
+unsigned int po(unsigned int *flags, va_list *list)
 {
 write(1, "\npo\n", 4);
 return (2);

@@ -6,7 +6,7 @@
 /*   By: mriccard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 16:31:30 by mriccard          #+#    #+#             */
-/*   Updated: 2018/04/12 22:03:53 by mriccard         ###   ########.fr       */
+/*   Updated: 2018/04/21 21:27:37 by mriccard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,67 +14,88 @@
 
 static unsigned int magic(char **str, va_list *list, unsigned int *flags)
 {
-	const char l[19] = {'s','S','p','d','D','i','o','O','u','U','x','X','c','C','%','j','z','l','h'};
-	unsigned int(*func[22])(unsigned int *flags, va_list *list) = {ps, pcs, pp, pd, pcd, pi, po, pco, pu, pcu, px, pcx, pc, pcc, perc, pj, pz, pl, ph, bt, pll, phh};
+	const char l[15] = {'s','S','p','d','D','i','o','O','u','U','x','X','c','C','%'};
+	unsigned int(*func[16])(unsigned int *flags, va_list *list) = {ps, pcs, pp, pd, pcd, pi, po, pco, pu, pcu, px, pcx, pc, pcc, perc, bt};
 	unsigned int i;
 
 	i = 0;
+	while ((*str)[i] == 'j' || (*str)[i] == 'z' || (*str)[i] == 'h' || (*str)[i] == 'l')
+	{
+		flags[7] = (((*str)[i])) == 'j';
+		flags[8] = (((*str)[i])) == 'z';
+		if (((*str)[i]) == 'h')
+		{
+			if(((*str)[i + 1]) == 'h')
+			{
+				flags[11] = 1;
+				i++;
+			}
+			else
+				flags[9] = 1;
+		}
+		if (((*str)[i]) == 'l')
+		{
+			if(((*str)[i + 1]) == 'l')
+			{
+				flags[12] = 1;
+				i++;
+			}
+			else
+				flags[10] = 1;
+		}
+		i++;
+	}
+	*str = (*str) + i;
+	i = 0;
 	while (i < 19 && l[i] != (*str)[0])
 		i++;
-	if ((i == 17 || i == 18) && (*str)[1] == l[i])
-	{
-		i = i + 3;
-		(*str) = (*str) + 1;
-	}
-		(*str) = (*str) + 1;
+	*str = (*str) + 1;
 	return((*func[i])(flags, list));
-
 }
 
 static unsigned int flags_manager(char **str, va_list *list, unsigned int *flags)
 {
 	int i;
-	int j;
-	unsigned int dotflag
+	unsigned int dotflag;
 
-	i = 1;
+		i = 1;
 	while ((*str)[i] == '#' || (*str)[i] == '0' || (*str)[i] == '-' || (*str)[i] == '+' || (*str)[i] == ' ')
 	{
-		flags[0] = ((*str)[i]) == '#';
-		flags[1] = ((*str)[i]) == '0';
-		flags[2] = ((*str)[i]) == '-';
-		flags[3] = ((*str)[i]) == '+';
-		flags[4] = ((*str)[i]) == ' ';
+		flags[0] = (((*str)[i]) == '#');
+		flags[1] = (((*str)[i]) == '0');
+		flags[2] = (((*str)[i]) == '-');
+		flags[3] = (((*str)[i]) == '+');
+		flags[4] = (((*str)[i]) == ' ');
 		i++;
 	}
 
-while((*str)[i] == '*' || (*str)[i] == '.' || ft_isdigit((*str)[i]))
-{
-	if((*str)[i - 1] == '.')
+	while((*str)[i] == '*' || (*str)[i] == '.' || ft_isdigit((*str)[i]))
 	{
-		dotflag = 1;
-	}
-	else
-	{
-		dotflag = 0;
-	}
+		if((*str)[i - 1] == '.')
+		{
+			dotflag = 1;
+		}
+		else
+		{
+			dotflag = 0;
+		}
 
-	if((*str)[i] == '*')
-	{
-		flags[5 + dotflag] = (unsigned int) ft_atoi(va_arg(*list, char*));
-		i++;
+		if((*str)[i] == '*')
+		{
+			flags[5 + dotflag] = (unsigned int) ft_atoi(va_arg(*list, char*));
+			i++;
+		}
+		else if((*str)[i] == '.')
+		{
+			i++;
+		}
+		else
+		{
+			flags[5 + dotflag] = (unsigned int) ft_atoi((*str) + i);
+			while(ft_isdigit((*str)[i]))
+				i++;
+		}
 	}
-	else if((*str)[i] == '.')
-	{
-		i++;
-	}
-	else
-	{
-		flags[5 + dotflag] = (unsigned int) ft_atoi((*str) + i);
-		while(ft_sidigit((*str)[i]))
-			            i++;
-	}
-}
 	return (i);
 }
 
@@ -82,12 +103,17 @@ static unsigned int ppjn(char **str, va_list *list)
 {
 	unsigned int i;
 	unsigned int count;
-	unsigned int flags[7];
+	unsigned int flags[13];
 
 	if (*str == NULL)
 		return (0);
-	i = flags_manager(str, flags);
-	count = magic((*str) + i, list, flags);
+	i = 0;
+	while (i < 13)
+		flags[i++] = 0;
+	i = 0;
+	i = flags_manager(str, list, flags);
+	*str = (*str) + i;
+	count = magic(str, list, flags);
 	//ORA LO FA DENTRO MAGI COL PUNTATORE *str = (*str) + i + 1; //da per scontato che la lettera dopo il percentio sia una e solo una, MALE!!!!
 	return (count);
 }

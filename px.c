@@ -6,13 +6,13 @@
 /*   By: mriccard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:28:51 by mriccard          #+#    #+#             */
-/*   Updated: 2018/03/08 17:10:07 by mriccard         ###   ########.fr       */
+/*   Updated: 2018/04/21 20:29:52 by mriccard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-unsigned int px(va_list *list)
+unsigned int px(unsigned int *flags, va_list *list)
 {
 write(1, "\npx\n", 4);
 return (2);

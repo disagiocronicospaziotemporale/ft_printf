@@ -6,13 +6,13 @@
 /*   By: mriccard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:28:51 by mriccard          #+#    #+#             */
-/*   Updated: 2018/03/30 19:46:42 by mriccard         ###   ########.fr       */
+/*   Updated: 2018/04/21 20:36:32 by mriccard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-unsigned int pd(va_list *list)
+unsigned int pd(unsigned int *flags, va_list *list)
 {
 
 

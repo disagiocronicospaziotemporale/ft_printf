@@ -6,13 +6,13 @@
 /*   By: mriccard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:28:51 by mriccard          #+#    #+#             */
-/*   Updated: 2018/03/08 17:03:58 by mriccard         ###   ########.fr       */
+/*   Updated: 2018/04/21 20:53:05 by mriccard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-unsigned int pcs(va_list *list)
+unsigned int pcs(unsigned int *flags, va_list *list)
 {
 write(1, "\npcs\n", 5);
 return (3);

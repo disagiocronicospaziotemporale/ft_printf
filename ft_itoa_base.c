@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "../libft/libft.h"
 
 static char	*charadder(char *str, int nb)
 {

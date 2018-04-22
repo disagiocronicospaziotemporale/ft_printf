@@ -6,13 +6,13 @@
 /*   By: mriccard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:28:51 by mriccard          #+#    #+#             */
-/*   Updated: 2018/03/08 17:16:49 by mriccard         ###   ########.fr       */
+/*   Updated: 2018/04/21 20:21:27 by mriccard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-unsigned int bt(va_list *list)
+unsigned int bt(unsigned int *flags, va_list *list)
 {
 write(1, "\nBT\n", 4);
 return (2);
