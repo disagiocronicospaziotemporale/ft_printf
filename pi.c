@@ -6,7 +6,7 @@
 /*   By: mriccard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:28:51 by mriccard          #+#    #+#             */
-/*   Updated: 2018/04/22 19:18:54 by mriccard         ###   ########.fr       */
+/*   Updated: 2018/04/24 19:43:11 by mriccard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,25 @@
 
 unsigned int pi(unsigned int *flags, va_list *list)
 {
-	unsigned int n;
+	unsigned int max_spaces;
+	unsigned int precision;
 	unsigned int i;
 	char fill_char;
-	long long int c;
+	intmax_t x;
 
-	c = va_arg(*list, char);
-	n = flags[5] + 1;
+
+	//12 ll
+	//11 hh
+	//10 l
+	//9 h
+	//8 z
+	//7 j
+	
+	x = size_manager_d('i', flags, list);
+
+	max_spaces = flags[5] + 1;
+	precision = flags[6];
+	
 
 	if(flags[1])
 		fill_char = '0';

@@ -6,7 +6,7 @@
 /*   By: mriccard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 16:31:30 by mriccard          #+#    #+#             */
-/*   Updated: 2018/04/21 21:27:37 by mriccard         ###   ########.fr       */
+/*   Updated: 2018/04/24 19:43:15 by mriccard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static unsigned int magic(char **str, va_list *list, unsigned int *flags)
 {
 	const char l[15] = {'s','S','p','d','D','i','o','O','u','U','x','X','c','C','%'};
-	unsigned int(*func[16])(unsigned int *flags, va_list *list) = {ps, pcs, pp, pd, pcd, pi, po, pco, pu, pcu, px, pcx, pc, pcc, perc, bt};
+	unsigned int(*func[16])(unsigned int *flags, va_list *list) = {ps, pcs, pp, pi, pcd, pi, po, pco, pu, pcu, px, pcx, pc, pcc, perc, bt};
 	unsigned int i;
 
 	i = 0;
