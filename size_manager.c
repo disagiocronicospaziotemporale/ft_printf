@@ -6,13 +6,13 @@
 /*   By: mriccard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 15:43:06 by mriccard          #+#    #+#             */
-/*   Updated: 2018/04/24 19:24:47 by mriccard         ###   ########.fr       */
+/*   Updated: 2018/05/09 19:39:06 by mriccard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void size_flags_short(unsigned int *flags, unsigned int *monoflag)
+static void	size_flags_short(unsigned int *flags, unsigned int *monoflag)
 {
 	*monoflag = 1;
 	if (flags[8])
@@ -29,7 +29,7 @@ static void size_flags_short(unsigned int *flags, unsigned int *monoflag)
 		*monoflag = 3;
 }
 
-intmax_t    size_manager_d(char type, unsigned int *flags, va_list *list)
+intmax_t	size_manager_d(char type, unsigned int *flags, va_list *list)
 {
 	unsigned int monoflag;
 
@@ -50,7 +50,7 @@ intmax_t    size_manager_d(char type, unsigned int *flags, va_list *list)
 	else
 		return ((long long)va_arg(*list, long));
 }
-uintmax_t   size_manager_u(char type, unsigned int *flags, va_list *list)
+uintmax_t	size_manager_u(char type, unsigned int *flags, va_list *list)
 {
 	unsigned int monoflag;
 

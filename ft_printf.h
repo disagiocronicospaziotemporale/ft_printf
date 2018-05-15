@@ -6,7 +6,7 @@
 /*   By: mriccard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 13:52:31 by mriccard          #+#    #+#             */
-/*   Updated: 2018/04/12 22:35:04 by mriccard         ###   ########.fr       */
+/*   Updated: 2018/04/28 16:26:21 by mriccard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
+# include <unistd.h>
+# include <stdlib.h>
 # include "libft/libft.h"
 # include <stdarg.h>
 

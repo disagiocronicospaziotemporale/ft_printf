@@ -6,7 +6,7 @@
 /*   By: mriccard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 16:31:30 by mriccard          #+#    #+#             */
-/*   Updated: 2018/04/24 19:43:15 by mriccard         ###   ########.fr       */
+/*   Updated: 2018/05/15 17:26:22 by mriccard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,9 @@ static unsigned int flags_manager(char **str, va_list *list, unsigned int *flags
 				i++;
 		}
 	}
-	return (i);
+	if((*str)[i - 1] == '.')
+		flags[6] = 0;
+		return (i);
 }
 
 static unsigned int ppjn(char **str, va_list *list)
@@ -110,11 +112,11 @@ static unsigned int ppjn(char **str, va_list *list)
 	i = 0;
 	while (i < 13)
 		flags[i++] = 0;
+	flags[6] = -1;
 	i = 0;
 	i = flags_manager(str, list, flags);
 	*str = (*str) + i;
 	count = magic(str, list, flags);
-	//ORA LO FA DENTRO MAGI COL PUNTATORE *str = (*str) + i + 1; //da per scontato che la lettera dopo il percentio sia una e solo una, MALE!!!!
 	return (count);
 }
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_utoa_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mriccard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/28 16:53:18 by mriccard          #+#    #+#             */
-/*   Updated: 2018/04/28 17:04:07 by mriccard         ###   ########.fr       */
+/*   Created: 2018/04/28 16:50:46 by mriccard          #+#    #+#             */
+/*   Updated: 2018/04/28 17:04:16 by mriccard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ static char	*charadder(char *str, int nb)
 	while (str[i])
 		i++;
 	str = (char*)malloc(sizeof(char) * (i + 2));
-	str[i] = (nb > 9) ? nb + 55 : nb + 48;
 	i = 0;
+	str[i] = (nb > 9) ? nb + 55 : nb + 48;
 	while (tmp[i])
 	{
 		str[i + 1] = tmp[i];
@@ -34,15 +34,12 @@ static char	*charadder(char *str, int nb)
 	return (str);
 }
 
-char		*ft_itoa_base(intmax_t v, int base)
+char		*ft_utoa_base(uintmax_t v, int base)
 {
-	int		minus;
-	char	*str;
+	char		*str;
 
 	if (base < 2 || base > 16)
 		return (NULL);
-	minus = (v < 0);
-	v = (v < 0) ? -v : v;
 	str = (char*)malloc(sizeof(char));
 	str[0] = 0;
 	while (v / base > 0)
@@ -50,7 +47,6 @@ char		*ft_itoa_base(intmax_t v, int base)
 		str = charadder(str, v % base);
 		v = v / base;
 	}
-	str = charadder(str, v);
-	str = (minus == 1 && base == 10) ? charadder(str, -3) : str;
+	str = ft_charadder(str, v);
 	return (str);
 }
