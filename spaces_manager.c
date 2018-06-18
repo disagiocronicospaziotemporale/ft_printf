@@ -6,7 +6,7 @@
 /*   By: mriccard <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 19:25:15 by mriccard          #+#    #+#             */
-/*   Updated: 2018/05/15 17:50:32 by mriccard         ###   ########.fr       */
+/*   Updated: 2018/05/21 18:10:48 by mriccard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,10 @@ char *min_spaces_manager(unsigned int *flags, char *str)
 	{
 		new_str[i + (l * flags[2])] = fill_char;
 		i++;
+	}
+	if (fill_char == '0' && new_str[flags[5] - l])//...da finire spagliaho boh per usare il meno con gli zeri e non left padded
+	{
+
 	}
 	free(str);
 	return (new_str);
